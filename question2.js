@@ -99,6 +99,7 @@ console.log(`decodeString('2[a]2[b]')`, decodeString('2[a]2[b]')) // returns  'a
 /*
 Comments on Question:
     I was able to get the correct answer for the given test cases and few edge cases. However, I wasn't able
-    to correctly implemented the algorithm for all possible cases. I'm running low on time so I feel that it
-    would be better if I spent more time on other parts of the application.
+    to correctly implemented the algorithm for all possible scenarios. I'm running low on time so I feel that it
+    would be better if I spent more time on other parts of the application. If you guys have the chance, I'd appreciate it
+    if you could send me the solution to this problem so I could compare it to my code
 */
