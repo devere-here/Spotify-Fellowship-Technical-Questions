@@ -1,12 +1,22 @@
+/*
+    Question 2 -- decodeString(s): Given an encoded string, return its corresponding decoded string. 
+
+    The encoding rule is: k[encoded_string], where the encoded_string inside the square brackets is repeated exactly k times. Note: k is guaranteed to be a positive integer. 
+
+    For s = "4[ab]", the output should be decodeString(s) = "abababab" 
+    For s = "2[b3[a]]", the output should be decodeString(s) = "baaabaaa"
+*/
+
+
 /* Helper Functions*/
 
-const addToNumberStack = (numberStack, number, lastElement) => {
-    if (lastElement === 'added number'){
+const addToNumberStack = (numberStack, number, previousAction) => {
+    if (previousAction === 'added number'){
         let previousDigits = numberStack.pop()
         number = previousDigits.toString() + number.toString()
     }
 
-    numberStack.push(number)
+    numberStack.push(+number)
 
     return numberStack
 }
@@ -48,13 +58,19 @@ const isLetter = elem => elem  !== ']'
 
 /* Main Decode String Function*/
 
+/*
+    Space Complexity: O(n)
+    Time Complexity: 0(n)
+*/
+
 const decodeString = (string) => {
     let numberStack = [],
         stringStack = [],
         decodedString = '',
+        stringArr = string.split(''),
         previousAction
 
-    string.split('').forEach(elem => {
+    stringArr.forEach(elem => {
         if (isNumber(elem)){
             numberStack = addToNumberStack(numberStack, +elem, previousAction)
             previousAction = 'added number'
@@ -69,3 +85,20 @@ const decodeString = (string) => {
 
     return decodedString
 }
+
+
+/* Correct Tests */
+console.log(`decodeString('4[ab]')`, decodeString('4[ab]')) // returns  'abababab'
+console.log(`decodeString('2[b3[a]]')`, decodeString('2[b3[a]]')) // returns  'baaabaaa'
+console.log(`decodeString('2[3[a]b]')`, decodeString('2[3[a]b]')) // returns  'aaabaaab'
+console.log(`decodeString('10[ab]')`, decodeString('10[ab]')) // returns  'abababababababababab'
+
+/* Incorrect Test */
+console.log(`decodeString('2[a]2[b]')`, decodeString('2[a]2[b]')) // returns  'aabaab' expected 'aabb'
+
+/*
+Comments on Question:
+    I was able to get the correct answer for the given test cases and few edge cases. However, I wasn't able
+    to correctly implemented the algorithm for all possible cases. I'm running low on time so I feel that it
+    would be better if I spent more time on other parts of the application.
+*/
